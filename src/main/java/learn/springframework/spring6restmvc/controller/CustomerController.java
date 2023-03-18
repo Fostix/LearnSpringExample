@@ -20,8 +20,8 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PatchMapping(CUSTOMER_PATH_ID)
-    public ResponseEntity updateCustomerPatchById(@PathVariable("customerId") UUID customerId,
-                                                  @RequestBody CustomerDTO customer) {
+    public ResponseEntity patchCustomerById(@PathVariable("customerId") UUID customerId,
+                                                @RequestBody CustomerDTO customer){
 
         customerService.patchCustomerById(customerId, customer);
 
@@ -29,7 +29,7 @@ public class CustomerController {
     }
 
     @DeleteMapping(CUSTOMER_PATH_ID)
-    public ResponseEntity deleteById(@PathVariable("customerId") UUID customerId) {
+    public ResponseEntity deleteCustomerById(@PathVariable("customerId") UUID customerId){
 
         if (!customerService.deleteCustomerById(customerId)) {
             throw new NotFoundException();
@@ -39,8 +39,8 @@ public class CustomerController {
     }
 
     @PutMapping(CUSTOMER_PATH_ID)
-    public ResponseEntity updateById(@PathVariable("customerId") UUID customerId,
-                                     @RequestBody CustomerDTO customer) {
+    public ResponseEntity updateCustomerByID(@PathVariable("customerId") UUID customerId,
+                                             @RequestBody CustomerDTO customer){
 
         if (customerService.updateCustomerById(customerId, customer).isEmpty()) {
             throw new NotFoundException();
@@ -59,14 +59,14 @@ public class CustomerController {
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
 
-    @GetMapping(value = CUSTOMER_PATH)
-    public List<CustomerDTO> listAllCustomers() {
+    @GetMapping(CUSTOMER_PATH)
+    public List<CustomerDTO> listAllCustomers(){
         return customerService.getAllCustomers();
     }
 
     @GetMapping(value = CUSTOMER_PATH_ID)
-    public CustomerDTO getCustomerById(@PathVariable("customerId") UUID customerId) {
-        return customerService.getCustomerById(customerId).orElseThrow(NotFoundException::new);
+    public CustomerDTO getCustomerById(@PathVariable("customerId") UUID id){
+        return customerService.getCustomerById(id).orElseThrow(NotFoundException::new);
     }
 
 }

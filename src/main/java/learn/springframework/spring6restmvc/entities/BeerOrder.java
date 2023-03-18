@@ -20,11 +20,11 @@ import java.util.UUID;
 @NoArgsConstructor
 public class BeerOrder {
 
-    public BeerOrder(UUID id, Long version, Timestamp createdDate, Timestamp updatedDate, String customerRef, Customer customer, Set<BeerOrderLine> beerOrderLines) {
+    public BeerOrder(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, String customerRef, Customer customer, Set<BeerOrderLine> beerOrderLines) {
         this.id = id;
         this.version = version;
         this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
+        this.lastModifiedDate = lastModifiedDate;
         this.customerRef = customerRef;
         this.setCustomer(customer);
         this.beerOrderLines = beerOrderLines;
@@ -45,7 +45,7 @@ public class BeerOrder {
     @Column(updatable = false)
     private Timestamp createdDate;
     @UpdateTimestamp
-    private Timestamp updatedDate;
+    private Timestamp lastModifiedDate;
 
     public boolean isNew() {
         return this.id == null;

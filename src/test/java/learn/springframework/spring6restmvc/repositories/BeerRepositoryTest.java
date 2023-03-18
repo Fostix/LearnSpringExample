@@ -36,8 +36,8 @@ class BeerRepositoryTest {
             Beer savedBeer = beerRepository.save(Beer.builder()
                     .beerName("My Beer 5720943587723098757209435877230987572094358772309875720943587723098757209435877230987572094358772309875720943587723098757209435877230987")
                     .beerStyle(BeerStyle.PALE_ALE)
-                    .upc("6230948753240")
-                    .price(new BigDecimal(11.19))
+                    .upc("234234234234")
+                    .price(new BigDecimal("11.99"))
                     .build());
 
             beerRepository.flush();
@@ -50,8 +50,8 @@ class BeerRepositoryTest {
         Beer savedBeer = beerRepository.save(Beer.builder()
                         .beerName("My Beer")
                         .beerStyle(BeerStyle.PALE_ALE)
-                        .upc("6230948753240")
-                        .price(new BigDecimal("11.19"))
+                        .upc("234234234234")
+                        .price(new BigDecimal("11.99"))
                 .build());
 
         beerRepository.flush();

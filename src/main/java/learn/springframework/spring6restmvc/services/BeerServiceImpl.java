@@ -30,7 +30,7 @@ public class BeerServiceImpl implements BeerService {
                 .price(new BigDecimal("12.99"))
                 .quantityOnHand(122)
                 .createdDate(LocalDateTime.now())
-                .updatedDate(LocalDateTime.now())
+                .updateDate(LocalDateTime.now())
                 .build();
 
         BeerDTO beer2 = BeerDTO.builder()
@@ -42,7 +42,7 @@ public class BeerServiceImpl implements BeerService {
                 .price(new BigDecimal("15.99"))
                 .quantityOnHand(392)
                 .createdDate(LocalDateTime.now())
-                .updatedDate(LocalDateTime.now())
+                .updateDate(LocalDateTime.now())
                 .build();
 
         BeerDTO beer3 = BeerDTO.builder()
@@ -54,7 +54,7 @@ public class BeerServiceImpl implements BeerService {
                 .price(new BigDecimal("11.99"))
                 .quantityOnHand(312)
                 .createdDate(LocalDateTime.now())
-                .updatedDate(LocalDateTime.now())
+                .updateDate(LocalDateTime.now())
                 .build();
 
         beerMap.put(beer1.getId(), beer1);
@@ -63,8 +63,8 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
-    public Optional<BeerDTO> patchBeerById(UUID bearId, BeerDTO beer) {
-        BeerDTO existing = beerMap.get(bearId);
+    public Optional<BeerDTO> patchBeerById(UUID beerId, BeerDTO beer) {
+        BeerDTO existing = beerMap.get(beerId);
 
         if (StringUtils.hasText(beer.getBeerName()))
             existing.setBeerName(beer.getBeerName());
@@ -92,8 +92,8 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
-    public Optional<BeerDTO> updateBeerById(UUID bearId, BeerDTO beer) {
-        BeerDTO existing = beerMap.get(bearId);
+    public Optional<BeerDTO> updateBeerById(UUID beerId, BeerDTO beer) {
+        BeerDTO existing = beerMap.get(beerId);
         existing.setBeerName(beer.getBeerName());
         existing.setPrice(beer.getPrice());
         existing.setUpc(beer.getUpc());
@@ -110,7 +110,7 @@ public class BeerServiceImpl implements BeerService {
     @Override
     public Optional<BeerDTO> getBeerById(UUID id) {
 
-        log.debug("Get Beer Id - in service. Id: " + id.toString());
+        log.debug("Get Beer by Id - in service. Id: " + id.toString());
 
         return Optional.of(beerMap.get(id));
     }
@@ -122,7 +122,7 @@ public class BeerServiceImpl implements BeerService {
                 .id(UUID.randomUUID())
                 .version(1)
                 .createdDate(LocalDateTime.now())
-                .updatedDate(LocalDateTime.now())
+                .updateDate(LocalDateTime.now())
                 .beerName(beer.getBeerName())
                 .beerStyle(beer.getBeerStyle())
                 .quantityOnHand(beer.getQuantityOnHand())

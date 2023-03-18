@@ -31,7 +31,7 @@ public class Customer {
     @Version
     private Integer version;
     private LocalDateTime createdDate;
-    private LocalDateTime updatedDate;
+    private LocalDateTime updateDate;
 
     @Builder.Default
     @OneToMany(mappedBy = "customer")
