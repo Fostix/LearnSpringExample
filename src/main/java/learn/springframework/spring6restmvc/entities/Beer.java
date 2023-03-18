@@ -50,7 +50,8 @@ public class Beer {
     private Set<BeerOrderLine> beerOrderLines;
 
     @ManyToMany
-    @JoinTable(joinColumns = @JoinColumn(name = "beer_id"),
+    @JoinTable(name = "beer_categories",
+            joinColumns = @JoinColumn(name = "beer_id"),
         inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories;
 
