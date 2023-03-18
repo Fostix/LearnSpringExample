@@ -32,7 +32,7 @@ public class BeerOrderLine {
     @Version
     private Long version;
     @CreationTimestamp
-    @Column
+    @Column(updatable = false)
     private Timestamp createdDate;
 
     @UpdateTimestamp
@@ -40,6 +40,10 @@ public class BeerOrderLine {
     public boolean isNew() {
         return this.id == null;
     }
+    @ManyToOne
+    private BeerOrder beerOrder;
+    @ManyToOne
+    private Beer beer;
     private Integer orderQuantity = 0;
     private Integer quantityAllocated = 0;
 }

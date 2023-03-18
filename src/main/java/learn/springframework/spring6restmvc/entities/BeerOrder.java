@@ -9,15 +9,27 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
 
 import java.sql.Timestamp;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Builder
 @Entity
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 public class BeerOrder {
+
+    public BeerOrder(UUID id, Long version, Timestamp createdDate, Timestamp updatedDate, String customerRef, Customer customer, Set<BeerOrderLine> beerOrderLines) {
+        this.id = id;
+        this.version = version;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+        this.customerRef = customerRef;
+        this.setCustomer(customer);
+        this.beerOrderLines = beerOrderLines;
+    }
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -29,21 +41,6 @@ public class BeerOrder {
     private UUID id;
     @Version
     private Long version;
-
-//    @NotNull
-//    @NotBlank
-//    @Size(max = 50)
-//    @Column(length = 50)
-//    private String beerName;
-//    @NotNull
-//    private BeerStyle beerStyle;
-//    @NotNull
-//    @NotBlank
-//    @Size(max = 255)
-//    private String upc;
-//    private Integer quantityOnHand;
-//    @NotNull
-//    private BigDecimal price;
     @CreationTimestamp
     @Column(updatable = false)
     private Timestamp createdDate;
@@ -57,4 +54,12 @@ public class BeerOrder {
     private String customerRef;
     @ManyToOne
     private Customer customer;
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+        customer.getBeerOrders().add(this);
+    }
+
+    @OneToMany(mappedBy = "beerOrder")
+    private Set<BeerOrderLine> beerOrderLines;
 }
