@@ -14,6 +14,7 @@ import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -45,6 +46,14 @@ public class Beer {
     private Integer quantityOnHand;
     @NotNull
     private BigDecimal price;
+    @OneToMany(mappedBy = "beer")
+    private Set<BeerOrderLine> beerOrderLines;
+
+    @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "beer_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
+
     @CreationTimestamp
     private LocalDateTime createdDate;
     @UpdateTimestamp
