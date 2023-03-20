@@ -2,6 +2,7 @@ package learn.springframework.spring6restmvc.repositories;
 
 import learn.springframework.spring6restmvc.entities.Beer;
 import learn.springframework.spring6restmvc.entities.BeerOrder;
+import learn.springframework.spring6restmvc.entities.BeerOrderShipment;
 import learn.springframework.spring6restmvc.entities.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,6 +39,9 @@ class BeerOrderRepositoryTest {
         BeerOrder beerOrder = BeerOrder.builder()
                 .customerRef("Test order")
                 .customer(testCustomer)
+                .beerOrderShipment(BeerOrderShipment.builder()
+                		.trackingNumber("1234df")
+                		.build())
                 .build();
 
         BeerOrder saveBeerOrder = beerOrderRepository.save(beerOrder);
